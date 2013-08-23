@@ -1,27 +1,30 @@
 WaterButt
 =========
-
 WaterButt is a Rainwave_ client framework for .Net and has been written in C#.
-
 It includes a *slightly* modified version of the fastJSON_ classes created by `Mehdi Gholam`_.
 
-Documentation is currently unavailable (until I'm done creating it).
+Author & Contributors
+---------------------
+* Andrew Webber (DuelMonster_)
+
+Documentation
+------------
+Currently unavailable (*until I'm done creating it*).
 
 Requirements
 ------------
-
 .Net 4 and above...
-
 
 Acquisition 
 -----------
-
 Clone this repository or download the latest `binary release`_ and unpack it.
 
+Licence
+-------
+Licensed under GPL v2 - "*GNU General Public License Version 2*".  Please see the LICENSE_.
 
 Acknowledgements
 ----------------
-
 I'd like to thank the two guys responsible for inspiring me to create this client framework project:
 
 `Rob McAuley`_:
@@ -30,6 +33,13 @@ I'd like to thank the two guys responsible for inspiring me to create this clien
 `William Jackson`_:
 	If it wasn't for your gutter_ client framework I'd probably have been still struggling to understand all the outputted data from the Rainwave_ API. I have used gutter_ as a basis for WaterButt_.
 
+Changelog
+=========
+*You may click the version number to compare it with the previous one.*
+
+* `0.1.R3`_ - *2013-08-23*
+	* Initial commit to GitHub
+	
 .. These are the README files links.
 .. _Rainwave: http://rainwave.cc/api/
 .. _fastJSON: http://www.codeproject.com/Articles/159450/fastJSON
@@ -39,3 +49,9 @@ I'd like to thank the two guys responsible for inspiring me to create this clien
 .. _William Jackson: https://github.com/williamjacksn
 .. _gutter: https://github.com/williamjacksn/gutter
 .. _WaterButt: https://github.com/williamjacksn/gutter
+.. _DuelMonster: https://github.com/DuelMonster
+.. _LICENSE: https://github.com/DuelMonster/WaterButt/blob/master/LICENSE
+.. 
+.. Links to the Changelog comparisons.
+.. 
+.. _0.1.R3: https://github.com/DuelMonster/WaterButt/releases/tag/0.1.R3
