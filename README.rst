@@ -21,7 +21,7 @@ Clone this repository or download the latest `binary release`_ and unpack it.
 
 Licence
 -------
-Licensed under GPL v2 - "*GNU General Public License Version 2*".  Please see the LICENSE_.
+Licensed under `GPL v2`_ - *GNU General Public License Version 2*.
 
 Acknowledgements
 ----------------
@@ -37,10 +37,13 @@ Changelog
 =========
 *You may click the version number to compare it with the previous one.*
 
+* `0.2.R3`_ - *In Progress*
 * `0.1.R3`_ - *2013-08-23*
 	* Initial commit to GitHub
 	
-.. These are the README files links.
+.. ============================================================================
+.. These are the README file hyperlinks.
+.. ============================================================================
 .. _Rainwave: http://rainwave.cc/api/
 .. _fastJSON: http://www.codeproject.com/Articles/159450/fastJSON
 .. _Mehdi Gholam: http://www.codeproject.com/Members/Mehdi-Gholam
@@ -50,8 +53,8 @@ Changelog
 .. _gutter: https://github.com/williamjacksn/gutter
 .. _WaterButt: https://github.com/williamjacksn/gutter
 .. _DuelMonster: https://github.com/DuelMonster
-.. _LICENSE: https://github.com/DuelMonster/WaterButt/blob/master/LICENSE
-.. 
+.. _GPL v2: https://github.com/DuelMonster/WaterButt/blob/master/LICENSE
+.. ============================================================================
 .. Links to the Changelog comparisons.
-.. 
+.. ============================================================================
 .. _0.1.R3: https://github.com/DuelMonster/WaterButt/releases/tag/0.1.R3

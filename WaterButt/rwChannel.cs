@@ -305,7 +305,7 @@ namespace WaterButt
 			_Schedule_Current.Add(CreateSchedule(oJSON.sched_current));
 
 			foreach (dynamic o in oJSON.sched_history)
-				_Schedule_History.Add(CreateSchedule(o));
+				_Schedule_History.Add(CreateSchedule(Client.JSON.ToDynamic(Client.JSON.ToJSON(o))));
 
 			foreach (dynamic o in oJSON.sched_next)
 				_Schedule_Next.Add(CreateSchedule(o));

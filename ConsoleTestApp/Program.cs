@@ -12,10 +12,10 @@ namespace ConsoleTestApp
 			DateTime dtStartTime = DateTime.Now;
 			string sJSON = "";
 
-			//RainwaveClient rw = new RainwaveClient(23994, "1382eab9d0");
+			RainwaveClient rw = new RainwaveClient(23994, "1382eab9d0");
 
-			//RainwaveChannel rwC = rw.Channels[1];
-			//var o = rwC.Schedule_Current;
+			RainwaveChannel rwC = rw.Channels[1];
+			var oSchd = rwC.Schedule_Current;
 
 			//RainwaveListener rwL = rwC.getListenerByID(23994);
 			//Console.WriteLine(rwL.sAvatar);
@@ -44,7 +44,7 @@ namespace ConsoleTestApp
 
 			//sJSON = rw.Call("async/2/get", null, true);
 
-			GetFavsAndHighlyRated();
+			//GetFavsAndHighlyRated();
 
 			Console.WriteLine("==================================================");
 			Console.WriteLine(GetTimingFormated(DateTime.Now - dtStartTime, false));
