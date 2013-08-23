@@ -3,6 +3,20 @@ WaterButt
 WaterButt is a Rainwave_ client framework for .Net and has been written in C#.
 It includes a *slightly* modified version of the fastJSON_ classes created by `Mehdi Gholam`_.
 
+TODO List
+=========
+* [ ] Ensure all elements of the framework are working correctly.
+* [ ] Ensure that the code is well commented.
+* [ ] Generate the Documentation.
+	
+Changelog
+=========
+*You may click the version number to compare it with the previous one.*
+
+* `0.2.R3-dev`_ - *In Progress*
+* `0.1.R3`_ - *2013-08-23*
+	* Initial commit to GitHub
+
 Author & Contributors
 ---------------------
 * Andrew Webber (DuelMonster_)
@@ -33,14 +47,6 @@ I'd like to thank the two guys responsible for inspiring me to create this clien
 `William Jackson`_:
 	If it wasn't for your gutter_ client framework I'd probably have been still struggling to understand all the outputted data from the Rainwave_ API. I have used gutter_ as a basis for WaterButt_.
 
-Changelog
-=========
-*You may click the version number to compare it with the previous one.*
-
-* `0.2.R3-dev`_ - *In Progress*
-* `0.1.R3`_ - *2013-08-23*
-	* Initial commit to GitHub
-	
 .. ============================================================================
 .. These are the README file hyperlinks.
 .. ============================================================================
