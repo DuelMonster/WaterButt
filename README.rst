@@ -37,7 +37,7 @@ Changelog
 =========
 *You may click the version number to compare it with the previous one.*
 
-* `0.2.R3`_ - *In Progress*
+* `0.2.R3-dev`_ - *In Progress*
 * `0.1.R3`_ - *2013-08-23*
 	* Initial commit to GitHub
 	
@@ -58,4 +58,4 @@ Changelog
 .. Links to the Changelog comparisons.
 .. ============================================================================
 .. _0.1.R3: https://github.com/DuelMonster/WaterButt/releases/tag/0.1.R3
-.. _0.2.R3: https://github.com/DuelMonster/WaterButt/compare/0.1.R3...master
+.. _0.2.R3-dev: https://github.com/DuelMonster/WaterButt/compare/0.1.R3...master
