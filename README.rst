@@ -1,9 +1,11 @@
 WaterButt
 =========
 
-WaterButt is a Rainwave_ client framework for .Net and has been written in C#. Documentation is currently unavailable.
+WaterButt is a Rainwave_ client framework for .Net and has been written in C#.
 
-.. _Rainwave: http://rainwave.cc/api/
+It includes a *slightly* modified version of the fastJSON_ classes created by `Mehdi Gholam`_.
+
+Documentation is currently unavailable (until I'm done creating it).
 
 Requirements
 ------------
@@ -16,4 +18,22 @@ Acquisition
 
 Clone this repository or download the latest `binary release`_ and unpack it.
 
+
+Acknowledgements
+----------------
+
+I'd like to thank the two guys responsible for inspiring me to create this client framework project:
+
+`Rob McAuley`_: Without you and Rainwave_ I'd still be going through my MP3 collection looking for all my favourite tracks to stick on disc for the car. Now I can listen to the tracks, rate/fav them, while I work and then use the API to filter them out of my local collection ready for disc creation.
+
+`William Jackson`_: If it wasn't for your gutter_ client framework I'd probably have been still struggling to understand all the outputted data from the Rainwave_ API. I have used gutter_ as a basis for WaterButt_.
+
+
+.. _Rainwave: http://rainwave.cc/api/
+.. _fastJSON: http://www.codeproject.com/Articles/159450/fastJSON
+.. _Mehdi Gholam: http://www.codeproject.com/Members/Mehdi-Gholam
 .. _binary release: https://github.com/DuelMonster/WaterButt/releases
+.. _Rob McAuley: https://github.com/rmcauley
+.. _William Jackson: https://github.com/williamjacksn
+.. _gutter: https://github.com/williamjacksn/gutter
+.. _WaterButt: https://github.com/williamjacksn/gutter
