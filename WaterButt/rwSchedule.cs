@@ -22,12 +22,12 @@ namespace WaterButt
 		[DataMember(Name = "sched_actualtime")]
 		public long lActualTime = 0;
 		/// <summary>The actual time of the RainwaveSchedule object in UTC time.</summary>
-		public DateTime dtActualTime;
+		public DateTime dtActualTime { get { return DateTime.FromFileTimeUtc(lActualTime); } }
 
 		[DataMember(Name = "sched_endtime")]
 		public long lEndTime = 0;
 		/// <summary>The end time of the RainwaveSchedule object in UTC time.</summary>
-		public DateTime dtEndTime;
+		public DateTime dtEndTime { get { return DateTime.FromFileTimeUtc(lEndTime); } }
 
 		/// <summary>The ID of the RainwaveSchedule object.</summary>
 		[DataMember(Name = "sched_id")]
@@ -48,7 +48,7 @@ namespace WaterButt
 		[DataMember(Name = "sched_starttime")]
 		public long lStartTime = 0;
 		/// <summary>The start time of the RainwaveSchedule object in UTC time.</summary>
-		public DateTime dtStartTime;
+		public DateTime dtStartTime { get { return DateTime.FromFileTimeUtc(lStartTime); } }
 
 		/// <summary>
 		/// The Type of RainwaveSchedule object.

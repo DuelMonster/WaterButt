@@ -302,20 +302,69 @@ namespace WaterButt
 			string sJSON = Client.Call(string.Format("async/{0}/get", iID));
 			dynamic oJSON = Client.JSON.ToDynamic(sJSON);
 
-			_Schedule_Current.Add(CreateSchedule(oJSON.sched_current));
+			_Schedule_Current.Add(CreateCurrentSchedule(oJSON.sched_current));
 
 			foreach (dynamic o in oJSON.sched_history)
-				_Schedule_History.Add(CreateSchedule(Client.JSON.ToDynamic(Client.JSON.ToJSON(o))));
+				_Schedule_History.Add(CreateSchedule(o));
 
 			foreach (dynamic o in oJSON.sched_next)
 				_Schedule_Next.Add(CreateSchedule(o));
 		}
 
+		private RainwaveSchedule CreateCurrentSchedule(dynamic oSchedule)
+		{
+			RainwaveSchedule rwSchedule = null;
+
+			if (oSchedule.sched_type == 4)
+			{
+				RainwaveOneTimePlay rwOTPSchedule = new RainwaveOneTimePlay(this);
+				rwSchedule = rwOTPSchedule;
+			}
+			else
+			{
+				RainwaveElection rwElecSchedule = new RainwaveElection(this);
+				rwElecSchedule.Candidates = Client.JSON.ToObject<List<RainwaveCandidate>>(Client.JSON.ToJSON(oSchedule.song_data));
+				rwSchedule = rwElecSchedule;
+			}
+
+			rwSchedule.lActualTime = oSchedule.sched_actualtime;
+			rwSchedule.lEndTime = oSchedule.sched_endtime;
+			rwSchedule.iID = Convert.ToInt32(oSchedule.sched_id);
+			rwSchedule.iLength = Convert.ToInt32(oSchedule.sched_length);
+			rwSchedule.sName = oSchedule.sched_name;
+			rwSchedule.sNotes = oSchedule.sched_notes;
+			rwSchedule.lStartTime = oSchedule.sched_starttime;
+			rwSchedule.iType = Convert.ToInt32(oSchedule.sched_type);
+			rwSchedule.iUsed = Convert.ToInt32(oSchedule.sched_used);
+			rwSchedule.iUserID = Convert.ToInt32(oSchedule.user_id);
+
+			return rwSchedule;
+		}
 		private RainwaveSchedule CreateSchedule(dynamic oSchedule)
 		{
-			RainwaveSchedule rwSchedule = new RainwaveElection(this);
+			RainwaveSchedule rwSchedule = null;
 
-			if (oSchedule.sched_type == 4) rwSchedule = new RainwaveOneTimePlay(this);
+			if (oSchedule["sched_type"] == 4)
+			{
+				RainwaveOneTimePlay rwOTPSchedule = new RainwaveOneTimePlay(this);
+				rwSchedule = rwOTPSchedule;
+			}
+			else
+			{
+				RainwaveElection rwElecSchedule = new RainwaveElection(this);
+				rwElecSchedule.Candidates = Client.JSON.ToObject<List<RainwaveCandidate>>(Client.JSON.ToJSON(oSchedule["song_data"]));
+				rwSchedule = rwElecSchedule;
+			}
+
+			rwSchedule.lActualTime = Convert.ToInt64(oSchedule["sched_actualtime"]);
+			rwSchedule.iID = Convert.ToInt32(oSchedule["sched_id"]);
+			rwSchedule.iLength = Convert.ToInt32(oSchedule["sched_length"]);
+			rwSchedule.sName = Convert.ToString(oSchedule["sched_name"]);
+			rwSchedule.sNotes = Convert.ToString(oSchedule["sched_notes"]);
+			rwSchedule.lStartTime = Convert.ToInt64(oSchedule["sched_starttime"]);
+			rwSchedule.iType = Convert.ToInt32(oSchedule["sched_type"]);
+			rwSchedule.iUsed = Convert.ToInt32(oSchedule["sched_used"]);
+			rwSchedule.iUserID = Convert.ToInt32(oSchedule["user_id"]);
 
 			return rwSchedule;
 		}
