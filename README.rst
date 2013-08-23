@@ -24,9 +24,11 @@ Acknowledgements
 
 I'd like to thank the two guys responsible for inspiring me to create this client framework project:
 
-`Rob McAuley`_: Without you and Rainwave_ I'd still be going through my MP3 collection looking for all my favourite tracks to stick on disc for the car. Now I can listen to the tracks, rate/fav them, while I work and then use the API to filter them out of my local collection ready for disc creation.
+# `Rob McAuley`_:
+	Without you and Rainwave_ I'd still be going through my MP3 collection looking for all my favourite tracks to stick on disc for the car. Now I can listen to the tracks, rate/fav them, while I work and then use the API to filter them out of my local collection ready for disc creation.
 
-`William Jackson`_: If it wasn't for your gutter_ client framework I'd probably have been still struggling to understand all the outputted data from the Rainwave_ API. I have used gutter_ as a basis for WaterButt_.
+# `William Jackson`_:
+	If it wasn't for your gutter_ client framework I'd probably have been still struggling to understand all the outputted data from the Rainwave_ API. I have used gutter_ as a basis for WaterButt_.
 
 
 .. _Rainwave: http://rainwave.cc/api/
