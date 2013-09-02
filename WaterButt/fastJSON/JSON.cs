@@ -61,9 +61,9 @@ namespace fastJSON
 		public void FixValues()
 		{
 			if (UseExtensions == false) // disable conflicting params
-			{
-				UsingGlobalTypes = false;
-			}
+                UsingGlobalTypes = false;
+            if (EnableAnonymousTypes)
+                ShowReadOnlyProperties = true;
 		}
 	}
 
@@ -87,11 +87,16 @@ namespace fastJSON
 		public JSONParameters Parameters = new JSONParameters();
 		private JSONParameters _params;
 
+        public string ToNiceJSON(object obj, JSONParameters param)
+        {
+            string s = ToJSON(obj, param);
+
+            return Beautify(s);
+        }
 		public string ToJSON(object obj)
 		{
 			_params = Parameters;
 			_params.FixValues();
-			Reflection.Instance.ShowReadOnlyProperties = _params.ShowReadOnlyProperties;
 			return ToJSON(obj, Parameters);
 		}
 
@@ -99,7 +104,6 @@ namespace fastJSON
 		{
 			_params = param;
 			_params.FixValues();
-			Reflection.Instance.ShowReadOnlyProperties = _params.ShowReadOnlyProperties;
 			Type t = null;
 
 			if (obj == null)
@@ -111,7 +115,7 @@ namespace fastJSON
 				_params.UsingGlobalTypes = false;
 
 			// FEATURE : enable extensions when you can deserialize anon types
-			if (_params.EnableAnonymousTypes) { _params.UseExtensions = false; _params.UsingGlobalTypes = false; Reflection.Instance.ShowReadOnlyProperties = true; }
+            if (_params.EnableAnonymousTypes) { _params.UseExtensions = false; _params.UsingGlobalTypes = false; }
 			_usingglobals = _params.UsingGlobalTypes;
 			return new JSONSerializer(_params).ConvertToJSON(obj);
 		}
@@ -119,7 +123,6 @@ namespace fastJSON
 		public object Parse(string json)
 		{
 			_params = Parameters;
-			Reflection.Instance.ShowReadOnlyProperties = _params.ShowReadOnlyProperties;
 			return new JsonParser(json, _params.IgnoreCaseOnDeserialize).Decode();
 		}
 
@@ -130,7 +133,22 @@ namespace fastJSON
 
 		public T ToObject<T>(string json)
 		{
-			return (T)ToObject(json, typeof(T));
+            Type t = typeof(T);
+            var o = ToObject(json, t);
+
+            if (t.IsArray)
+            {
+                if ((o as ICollection).Count == 0) // edge case for "[]" -> T[]
+                {
+                    Type tt = t.GetElementType();
+                    object oo = Array.CreateInstance(tt, 0);
+                    return (T)oo;
+                }
+                else
+                    return (T)o;
+            }
+            else
+                return (T)o;
 		}
 
 		public object ToObject(string json)
@@ -142,7 +160,6 @@ namespace fastJSON
 		{
 			_params = Parameters;
 			_params.FixValues();
-			Reflection.Instance.ShowReadOnlyProperties = _params.ShowReadOnlyProperties;
 			Type t = null;
 			if (type != null && type.IsGenericType)
 				t = type.GetGenericTypeDefinition();
@@ -163,7 +180,7 @@ namespace fastJSON
 #endif
 			if (o is IDictionary)
 			{
-				if (type != null && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>)) // deserialize a dictionary
+                if (type != null && t == typeof(Dictionary<,>)) // deserialize a dictionary
 					return RootDictionary(o, type);
 				else // deserialize an object
 					return ParseDictionary(o as Dictionary<string, object>, null, type, null);
@@ -171,10 +188,10 @@ namespace fastJSON
 
 			if (o is List<object>)
 			{
-				if (type != null && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>)) // kv format
+                if (type != null && t == typeof(Dictionary<,>)) // kv format
 					return RootDictionary(o, type);
 
-				if (type != null && type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>)) // deserialize to generic list
+                if (type != null && t == typeof(List<>)) // deserialize to generic list
 					return RootList(o, type);
 				else
 					return (o as List<object>).ToArray();
@@ -195,7 +212,6 @@ namespace fastJSON
 		{
 			_params = Parameters;
 			_params.FixValues();
-			Reflection.Instance.ShowReadOnlyProperties = _params.ShowReadOnlyProperties;
 			Dictionary<string, object> ht = new JsonParser(json, Parameters.IgnoreCaseOnDeserialize).Decode() as Dictionary<string, object>;
 			if (ht == null) return null;
 			return ParseDictionary(ht, null, input.GetType(), input);
@@ -431,6 +447,13 @@ namespace fastJSON
 		private object RootDictionary(object parse, Type type)
 		{
 			Type[] gtypes = type.GetGenericArguments();
+            Type t1 = null;
+            Type t2 = null;
+            if (gtypes != null)
+            {
+                t1 = gtypes[0];
+                t2 = gtypes[1];
+            }
 			if (parse is Dictionary<string, object>)
 			{
 				IDictionary o = (IDictionary)Reflection.Instance.FastCreateInstance(type);
@@ -441,10 +464,13 @@ namespace fastJSON
 					object k = ChangeType(kv.Key, gtypes[0]);
 					if (kv.Value is Dictionary<string, object>)
 						v = ParseDictionary(kv.Value as Dictionary<string, object>, null, gtypes[1], null);
-					else if (kv.Value is List<object>)
-						v = CreateArray(kv.Value as List<object>, typeof(object), typeof(object), null);
+                    else if (gtypes != null && t2.IsArray)
+                        v = CreateArray((List<object>)kv.Value, t2, t2.GetElementType(), null);
+                    else if (kv.Value is IList)
+                        v = CreateGenericList((List<object>)kv.Value, t2, t1, null);
 					else
 						v = ChangeType(kv.Value, gtypes[1]);
+                    
 					o.Add(k, v);
 				}
 
@@ -733,6 +759,10 @@ namespace fastJSON
 				object val = null;
 				if (values.Value is Dictionary<string, object>)
 					val = ParseDictionary((Dictionary<string, object>)values.Value, globalTypes, t2, null);
+                else if (types != null && t2.IsArray)
+                    val = CreateArray((List<object>)values.Value, t2, t2.GetElementType(), globalTypes);
+                else if (values.Value is IList)
+                    val = CreateGenericList((List<object>)values.Value, t2, t1, globalTypes);
 				else
 					val = ChangeType(values.Value, t2);
 				col.Add(key, val);
