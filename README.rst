@@ -65,5 +65,5 @@ I'd like to thank the two guys responsible for inspiring me to create this clien
 .. Links to the Changelog comparisons.
 .. ============================================================================
 .. _0.1.R3: https://github.com/DuelMonster/WaterButt/releases/tag/0.1.R3
-.. _0.1.R3.2: https://github.com/DuelMonster/WaterButt/releases/tag/0.1.R3.2
-.. _0.2.R3-dev: https://github.com/DuelMonster/WaterButt/compare/0.1.R3...master
+.. _0.1.R3.2: https://github.com/DuelMonster/WaterButt/compare/0.1.R3...0.1.R3.2
+.. _0.2.R3-dev: https://github.com/DuelMonster/WaterButt/compare/0.1.R3.2...master
