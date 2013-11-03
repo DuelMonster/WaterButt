@@ -12,7 +12,6 @@ namespace WaterButt
     public class RainwaveSong
     {
         public RainwaveSong() { }
-        public RainwaveSong(RainwaveAlbum p_rwAlbum) { Album = p_rwAlbum; }
 
         #region Song Collections:
 
@@ -24,17 +23,16 @@ namespace WaterButt
 
         #region Song Variables:
 
-        /// <summary>The RainwaveAlbum object the song belongs to.</summary>
-        public RainwaveAlbum Album = null;
+        /// <summary>The RainwaveChannel object the album belongs to.</summary>
+        public RainwaveChannel Channel { get; set; }
 
-        [DataMember(Name = "song_addedon")]
+        /// <summary>The RainwaveAlbum object the song belongs to.</summary>
+        public List<RainwaveAlbum> Albums = new List<RainwaveAlbum>();
+
+        [DataMember(Name = "added_on")]
         public long lAddedOn = 0;
         /// <summary>The UTC date and time the song was added to the playlist (a datetime.datetime object).</summary>
         public DateTime dtAddedOn { get { return DateTime.FromBinary(lAddedOn); } }
-
-        /// <summary>The RainwaveAlbum.id of the album the song belongs to.</summary>
-        [DataMember(Name = "album_id")]
-        public int iAlbumID { get; set; }
 
         /// <summary>A single string with the names of all artists for the song.</summary>
         public string sArtistString
@@ -48,17 +46,13 @@ namespace WaterButt
             }
         }
 
-        /// <summary>A boolean representing whether the song is available to play or not.</summary>
+        /// <summary>A Boolean representing whether the song is available to play or not.</summary>
         [DataMember(Name = "song_available")]
         public bool bAvailable { get; set; }
 
-        /// <summary>The RainwaveChannel.id of the channel the song belongs to.</summary>
-        [DataMember(Name = "sid")]
-        public int iChannelID { get; set; }
-
-        [DataMember(Name = "song_favourite")]
+        [DataMember(Name = "fave")]
         public bool _bFavourite { get; set; }
-        /// <summary>A boolean representing whether the song is marked as a favourite or not. Change whether the song is a favourite by assigning a boolean value to this attribute.</summary>
+        /// <summary>A Boolean representing whether the song is marked as a favourite or not. Change whether the song is a favourite by assigning a boolean value to this attribute.</summary>
         public bool bFavourite
         {
             get { return _bFavourite; }
@@ -68,13 +62,13 @@ namespace WaterButt
                 {
                     // Set the private variable and send a call to the API
                     _bFavourite = value;
-                    Album.Channel.favSong(iID, value);
+                    Channel.favSong(iID, value);
                 }
             }
         }
 
         /// <summary>The ID of the song.</summary>
-        [DataMember(Name = "song_id")]
+        [DataMember(Name = "id")]
         public int iID { get; set; }
 
         [DataMember(Name = "song_lastplayed")]
@@ -83,7 +77,7 @@ namespace WaterButt
         public DateTime dtLastPlayed { get { return DateTime.FromBinary(lLastPlayed); } }
 
         /// <summary>The rating given to the song by the listener authenticating to the API. Change the rating by assigning a new value to this attribute.</summary>
-        [DataMember(Name = "song_rating_user")]
+        [DataMember(Name = "rating_user")]
         public float fRating { get; set; }
 
         /// <summary>The average of all ratings given to the song by all listeners.</summary>
@@ -166,7 +160,6 @@ namespace WaterButt
     public class RainwaveCandidate : RainwaveSong
     {
         public RainwaveCandidate() { }
-        public RainwaveCandidate(RainwaveAlbum p_rwAlbum) : base(p_rwAlbum) { }
 
         #region Candidate Variables:
 
@@ -208,7 +201,6 @@ namespace WaterButt
     public class RainwaveRequest : RainwaveSong
     {
         public RainwaveRequest() { }
-        public RainwaveRequest(RainwaveAlbum p_rwAlbum) : base(p_rwAlbum) { }
 
         #region Request Variables:
 
@@ -225,7 +217,6 @@ namespace WaterButt
     public class RainwaveUserRequest : RainwaveSong
     {
         public RainwaveUserRequest() { }
-        public RainwaveUserRequest(RainwaveAlbum p_rwAlbum) : base(p_rwAlbum) { }
 
         #region UserRequest Variables:
 

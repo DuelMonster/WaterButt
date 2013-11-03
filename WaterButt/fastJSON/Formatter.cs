@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace fastJSON
 {
@@ -9,13 +10,6 @@ namespace fastJSON
         public static void AppendIndent(StringBuilder sb, int count)
         {
             for (; count > 0; --count) sb.Append(Indent);
-        }
-
-        public static bool IsEscaped(StringBuilder sb, int index)
-        {
-            bool escaped = false;
-            while (index > 0 && sb[--index] == '\\') escaped = !escaped;
-            return escaped;
         }
 
         public static string PrettyPrint(string input)
